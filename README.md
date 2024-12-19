@@ -19,3 +19,34 @@ Type "help", "copyright", "credits" or "license" for more information.
 dataframeloader module loaded.
 ```
 
+## Examples
+Using the generic `dataframeloader` method to read files with specific prefix.
+```python
+import cxcsvtopandas.dataframeloader as dfl
+root = '../../.dataDir'
+df = dfl.loadDataFrameFromFileRegex(root, "ASSESS*")
+```
+
+Optionally specify date range for filtering csv files;
+```python
+import cxcsvtopandas.dataframeloader as dfl
+root = '../../.dataDir'
+fromDt = '2024-11-10'
+toDt = '2024-12-10'
+df = dfl.loadDataFrameFromFileRegex(root, "ASSESS*", daterange=[fromDt, toDt])
+```
+
+Propritary timeseries reporting;
+```python
+import cxcsvtopandas.dataframeloader as dfl
+root = '../../.dataDir'
+fromDt = '2024-11-10'
+toDt = '2024-12-10'
+metricsArr = ['cpu_used','task_queue_length', 'memory_used']
+daterange=[fromDt, toDt]
+df = dfl.loadApplianceTimeSeriesData(root, metricsArr, daterange)
+appliance_id='58e98e10-1b19-4c84-93c0-db2ad5903b80'
+## fromDt and toDt can also be a subset of the total dataframe.
+fig  = dfl.plotMetricsFacetForApplianceId(df, appliance_id)
+fig.show()
+```
