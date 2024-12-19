@@ -42,9 +42,13 @@ def loadDataFrameFromFileRegex(root, regex, **kwargs):
             if fnmatch.fnmatch(name, regex) and os.path.getsize(os.path.join(path, name)) > 0:
                 if checkDateRangeFromFileName(daterange, name):
                     # print(os.path.join(path, name))
-                    df = pd.read_csv(os.path.join(path, name), on_bad_lines='warn')
-                    df.insert(1, 'metrics', metrics)
-                    df_arr.append(df)
+                    try:
+                        df = pd.read_csv(os.path.join(path, name), on_bad_lines='warn')
+                        df.insert(1, 'metrics', metrics)
+                        df_arr.append(df)
+                    except Exception as e:
+                        print(f"Error reading {os.path.join(path, name)}:\n\t {repr(e)}")
+                        continue    
     if not df_arr:
         warnings.warn("No matching file found in "+root+" for regex: "+regex+". Empty dataframe will be returned." )
         return pd.DataFrame()    
