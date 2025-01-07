@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="cxcsvtopandas",
-    version="0.1.3",
+    version="0.1.4",
     packages=find_packages(),
     author="Amit Gupta",
     author_email="amit864@gmail.com",
