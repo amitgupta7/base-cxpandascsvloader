@@ -6,6 +6,9 @@ You can install the `cxpandascsvloader` package using pip:
 
 ```sh
 pip install cxcsvtopandas
+## USAGE
+## import cxcsvtopandas.dataframeloader as dfl
+## dfl.printinfo()
 ```
 
 ## Usage
